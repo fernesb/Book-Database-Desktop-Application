@@ -23,5 +23,13 @@ def view():
     conn.close()
     return rows
 
+def search(title='',author='',year='',isbn=''):
+    conn=sqlite3.connect('books.db')
+    cursor=conn.cursor()
+    cursor.execute("SELECT * FROM book WHERE title=? OR author=? OR year=? OR isbn=?", (title,author,year,isbn))
+    rows=cursor.fetchall()
+    conn.close()
+    return rows
+
 
 connect()
